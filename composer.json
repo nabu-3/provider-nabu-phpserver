@@ -1,0 +1,37 @@
+{
+    "name": "nabu-3/provider-nabu-phpserver",
+    "description": "nabu-3 Provider to add PHP Server support",
+    "version": "0.0.1",
+    "type": "nabu-provider",
+    "keywords": [ "nabu-3", "nabu", "apache", "http", "https", "httpd", "provider", "php", "server" ],
+    "license": "Apache-2.0",
+    "authors": [
+        {
+            "name": "Rafael Gutierrez",
+            "email": "rgutierrez@nabu-3.com",
+            "role": "Developer"
+        }
+    ],
+    "support": {
+        "issues": "https://github.com/nabu-3/provider-nabu-phpserver/issues"
+    },
+    "config": {
+        "bin-dir": "bin",
+        "vendor-dir": "lib"
+    },
+    "require": {
+        "nabu-3/composer-installer-plugin": ">=3.0"
+    },
+    "require-dev": {
+        "nabu-3/composer-installer-plugin": "dev-master"
+    },
+    "repositories": [
+        {
+            "type": "vcs",
+            "url": "https://github.com/nabu-3/provider-nabu-phpserver"
+        }
+    ],
+    "bin": [
+        "bin/nabu-server.sh"
+    ]
+}
