@@ -40,5 +40,7 @@ php -S localhost:8000 \
        -d expose_php=0 \
        -d display_errors=0 \
        -d open_basedir=none \
+       -d error_reporting=E_ALL \
+       -d session.auto_start=0 \
        -d include_path=.:${NABU_HOST_PATH}/src/php:${NABU_BASE_PATH}/src/:${NABU_BASE_PATH}/pub/:${NABU_BASE_PATH}/sdk/:${NABU_BASE_PATH}/lib/ \
        ${NABU_SCRIPT_PATH}/inc/router.php
