@@ -1,9 +1,20 @@
 <?php
+use nabu\core\CNabuEngine;
 
-$_SERVER['SERVER_ADDR'] = '172.31.18.234';
-$_SERVER['SERVER_PORT'] = '80';
+use providers\nabu\phpserver\servers\CNabuPHPServerInterface;
+
+error_log(print_r($_SERVER, true));
 
 require_once 'common.php';
+
+CNabuEngine::setLocateHTTPServerHook(function($nb_http_server) {
+    error_log("HOLA");
+    if ($nb_http_server instanceof CNabuPHPServerInterface) {
+        $nb_http_server->setServerAddress('172.31.18.234');
+        $nb_http_server->setServerPort(80);
+        $nb_http_server->setServerName('www.nabu-3.com');
+    }
+});
 
 $request_uri = $_SERVER['REQUEST_URI'];
 $current_dir = getcwd();
@@ -11,10 +22,6 @@ $current_dir = getcwd();
 if (strlen($request_uri) == 0) {
    $request_uri = '/';
 }
-
-error_log(print_r($_ENV, true));
-error_log(print_r($_SERVER, true));
-error_log(ini_get('http_mode'));
 
 /** @source
   * error_log(print_r($_SERVER, true));

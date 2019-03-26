@@ -19,6 +19,8 @@
  *  limitations under the License.
  */
 
+use providers\nabu\phpserver\CNabuPHPServerManager;
+
 /**
  * @author Rafael Gutierrez <rgutierrez@nabu-3.com>
  * @since 0.0.1
@@ -31,3 +33,5 @@ define('NABU_PHPSERVER_MODULE_KEY', 'phpserver');
 define('NABU_PHPSERVER_MANAGER_KEY', 'CNabuPHPServerManager');
 
 define('NABU_PHPSERVER_PROVIDER_PATH', dirname(__FILE__));
+
+$nb_engine->registerProviderManager(new CNabuPHPServerManager());
