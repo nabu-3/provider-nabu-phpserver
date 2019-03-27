@@ -23,6 +23,8 @@ namespace providers\nabu\phpserver\servers;
 
 use nabu\http\adapters\CNabuHTTPServerAdapter;
 
+use nabu\http\interfaces\INabuHTTPFileSystem;
+
 /**
  * @author Rafael Gutierrez <rgutierrez@nabu-3.com>
  * @since 0.0.1
@@ -40,6 +42,11 @@ class CNabuPHPServerInterface extends CNabuHTTPServerAdapter
         $software = $this->getServerSoftware();
 
         return preg_match('/^PHP\s+7\.[0-9]{1,}\.[0-9]{1,}/', $software);
+    }
+
+    protected function createFileSystem() : INabuHTTPFileSystem
+    {
+        return new CNabuPHPServerFileSystem();
     }
 
     public function getServerAddress()
