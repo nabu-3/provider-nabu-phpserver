@@ -25,6 +25,7 @@ echo
 NABU_ETC_PATH=/etc/opt/nabu-3.conf.d
 NABU_SCRIPT_PATH=`realpath $0`
 NABU_SCRIPT_PATH=`dirname $NABU_SCRIPT_PATH`
+NABU_HOST_PATH=`pwd`
 
 if [ -d ${NABU_ETC_PATH} ] && [ -f ${NABU_ETC_PATH}/nabu-3.conf ] ; then
     source ${NABU_ETC_PATH}/nabu-3.conf
@@ -33,13 +34,13 @@ else
     exit 1
 fi
 
-echo nabu-3 install path is $NABU_BASE_PATH
-echo Running in ${NABU_SCRIPT_PATH}
-echo
 echo Starting HTTP Server...
+echo
 php -S localhost:8000 \
        -d expose_php=0 \
        -d display_errors=0 \
        -d open_basedir=none \
-       -d include_path=.:${NABU_BASE_PATH}/src/:${NABU_BASE_PATH}/pub/:${NABU_BASE_PATH}/sdk/:${NABU_BASE_PATH}/lib/ \
+       -d error_reporting=E_ALL \
+       -d session.auto_start=0 \
+       -d include_path=.:${NABU_HOST_PATH}/src/php:${NABU_BASE_PATH}/src/:${NABU_BASE_PATH}/pub/:${NABU_BASE_PATH}/sdk/:${NABU_BASE_PATH}/lib/ \
        ${NABU_SCRIPT_PATH}/inc/router.php

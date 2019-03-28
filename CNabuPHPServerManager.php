@@ -21,7 +21,15 @@
 
 namespace providers\nabu\phpserver;
 
+use nabu\core\CNabuEngine;
+
+use nabu\core\interfaces\INabuApplication;
+
 use nabu\http\adapters\CNabuHTTPModuleManagerAdapter;
+
+use nabu\http\app\base\CNabuHTTPApplication;
+
+use nabu\http\descriptors\CNabuHTTPServerInterfaceDescriptor;
 
 /**
  * @author Rafael Gutierrez <rgutierrez@nabu-3.com>
@@ -31,5 +39,39 @@ use nabu\http\adapters\CNabuHTTPModuleManagerAdapter;
  */
 class CNabuPHPServerManager extends CNabuHTTPModuleManagerAdapter
 {
+    /** @var CNabuHTTPServerInterfaceDescriptor PHP Server Interface Descriptor. */
+    private $nb_php_server_descriptor = null;
 
+    /**
+     * Default constructor.
+     */
+    public function __construct()
+    {
+        parent::__construct(NABU_PHPSERVER_VENDOR_KEY, NABU_PHPSERVER_MODULE_KEY);
+    }
+
+    public function enableManager()
+    {
+        $nb_engine = CNabuEngine::getEngine();
+
+        $this->nb_php_server_descriptor = new CNabuHTTPServerInterfaceDescriptor(
+            $this,
+            'NabuPHPServer',
+            'Nabu PHP Server',
+            __NAMESPACE__,
+            'CNabuPHPServerInterface'
+        );
+        $nb_engine->registerProviderInterface($this->nb_php_server_descriptor);
+
+        return true;
+    }
+
+    public function registerApplication(INabuApplication $nb_application)
+    {
+        if ($nb_application instanceof CNabuHTTPApplication) {
+            $this->nb_application = $nb_application;
+        }
+
+        return $this;
+    }
 }
