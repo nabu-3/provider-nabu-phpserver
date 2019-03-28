@@ -23,6 +23,8 @@ namespace providers\nabu\phpserver;
 
 use nabu\core\CNabuEngine;
 
+use nabu\core\interfaces\INabuApplication;
+
 use nabu\http\adapters\CNabuHTTPModuleManagerAdapter;
 
 use nabu\http\app\base\CNabuHTTPApplication;
@@ -64,7 +66,7 @@ class CNabuPHPServerManager extends CNabuHTTPModuleManagerAdapter
         return true;
     }
 
-    public function registerApplication(\nabu\core\interfaces\INabuApplication $nb_application)
+    public function registerApplication(INabuApplication $nb_application)
     {
         if ($nb_application instanceof CNabuHTTPApplication) {
             $this->nb_application = $nb_application;
